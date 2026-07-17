@@ -1,0 +1,24 @@
+/* ==========================================================================
+   responsive.css
+   Breakpoints, largest to smallest.
+   ========================================================================== */
+
+@media (max-width:980px){
+  .about-grid{grid-template-columns:1fr; gap:36px;}
+  .id-badge{max-width:280px;}
+  .process-rail{grid-template-columns:repeat(2,1fr); row-gap:40px;}
+  .process-rail::before{display:none;}
+  .p-step{padding-left:0;}
+  .tool-grid{grid-template-columns:repeat(2,1fr);}
+  .supplier-grid{grid-template-columns:repeat(2,1fr);}
+  .test-grid{grid-template-columns:1fr;}
+  .contact-panel{grid-template-columns:1fr; padding:40px 28px;}
+  .proj-card{width:270px;}
+}
+
+@media (max-width:760px){
+  .nav-links, .nav-cta{display:none;}
+  .burger{display:flex;}
+  .wrap{padding:0 22px;}
+  .hero{padding:150px 0 70px;}
+}

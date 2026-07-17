@@ -1,0 +1,26 @@
+/* ==========================================================================
+   variables.css
+   Design tokens — colors, type, layout. Change these to re-theme the site.
+   ========================================================================== */
+
+:root{
+  /* Colors */
+  --navy-deep:#0a1422;
+  --navy:#0f1c30;
+  --navy-panel:#122238;
+  --line:rgba(243,239,228,0.09);
+  --line-strong:rgba(243,239,228,0.16);
+  --cream:#f3efe4;
+  --cream-dim:#9fadc2;
+  --cream-dimmer:#71809a;
+  --gold:#f0a93b;
+  --gold-dim:#c98a2c;
+
+  /* Type */
+  --display:'Archivo Black', 'Inter', sans-serif;
+  --body:'Inter', sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+
+  /* Layout */
+  --maxw:1180px;
+}
