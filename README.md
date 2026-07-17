@@ -79,3 +79,4 @@ Loaded via Google Fonts CDN in `index.html` (Archivo Black, Inter, IBM Plex Mono
 ## Browser support
 
 Modern evergreen browsers (Chrome, Edge, Firefox, Safari). Uses CSS Grid, `aspect-ratio`, and `IntersectionObserver` — all widely supported since 2021+.
+"# My-Portfolio" 
