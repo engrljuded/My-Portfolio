@@ -1,5 +1,7 @@
 /* ==========================================================================
    script.js
+   Main entry point: small site-wide init tasks + the photo lightbox
+   (click the profile photo or any project photo to zoom).
 
    Note: image fallbacks (real photo missing -> styled placeholder shows
    through) are handled per-element with an inline onerror="" attribute in
