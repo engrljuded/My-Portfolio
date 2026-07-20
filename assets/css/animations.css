@@ -26,9 +26,22 @@
   transform:translateY(0);
 }
 
+/* lightbox open/close */
+.lightbox-overlay{
+  opacity:0;
+  transition:opacity .22s ease;
+}
+.lightbox-overlay.open{opacity:1;}
+.lightbox-stage img{
+  transition:transform .18s ease;
+}
+.lightbox-stage.dragging img{transition:none;}
+.lb-btn{transition:color .2s ease, border-color .2s ease;}
+
 @media (prefers-reduced-motion: reduce){
   .reveal{opacity:1; transform:none; transition:none;}
   html{scroll-behavior:auto;}
   .nav-links a, .nav-cta, .btn, .btn-ghost, .tool-chip, .supplier-chip,
   .contact-item .c-value, .foot-social a{ transition:none; }
+  .lightbox-overlay, .lightbox-stage img{transition:none;}
 }

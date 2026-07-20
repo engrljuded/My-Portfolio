@@ -11,9 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let isDown = false;
   let startX = 0;
   let scrollStart = 0;
+  let dragMoved = false;
 
   projScroll.addEventListener('mousedown', (e) => {
     isDown = true;
+    dragMoved = false;
     projScroll.classList.add('dragging');
     startX = e.pageX;
     scrollStart = projScroll.scrollLeft;
@@ -32,8 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
   projScroll.addEventListener('mousemove', (e) => {
     if (!isDown) return;
     e.preventDefault();
-    projScroll.scrollLeft = scrollStart - (e.pageX - startX);
+    const delta = e.pageX - startX;
+    if (Math.abs(delta) > 6) dragMoved = true;
+    projScroll.scrollLeft = scrollStart - delta;
   });
+
+  // if the pointer moved enough to count as a drag, swallow the resulting
+  // click so it doesn't also trigger the photo lightbox underneath it
+  projScroll.addEventListener('click', (e) => {
+    if (dragMoved) {
+      e.stopPropagation();
+      e.preventDefault();
+      dragMoved = false;
+    }
+  }, true);
 
   // convert vertical wheel intent into horizontal scroll
   projScroll.addEventListener('wheel', (e) => {

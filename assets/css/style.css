@@ -332,6 +332,54 @@ section + section{border-top:1px solid var(--line);}
 .c-value{font-size:15.5px; color:var(--cream); margin-top:3px; font-weight:500;}
 .c-value:hover{color:var(--gold);}
 
+/* ===== ZOOM HINT (appears on photos that have a real image loaded) ===== */
+.js-zoomable{cursor:zoom-in;}
+.zoom-hint{
+  position:absolute; bottom:12px; right:14px; width:30px; height:30px; border-radius:50%;
+  background:rgba(10,20,34,0.78); border:1px solid var(--gold-dim);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; z-index:3; pointer-events:none;
+}
+.zoom-hint svg{width:14px; height:14px; stroke:var(--gold);}
+.proj-photo:hover img ~ .zoom-hint,
+.id-photo:hover img ~ .zoom-hint{opacity:1;}
+
+/* ===== LIGHTBOX ===== */
+.lightbox-overlay{
+  position:fixed; inset:0; z-index:1000;
+  background:rgba(6,12,22,0.94);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+.lightbox-stage{
+  width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; cursor:grab;
+}
+.lightbox-stage.dragging{cursor:grabbing;}
+.lightbox-stage img{
+  max-width:88vw; max-height:82vh; width:auto; height:auto;
+  object-fit:contain; user-select:none; -webkit-user-drag:none;
+  will-change:transform;
+}
+.lightbox-toolbar{
+  position:absolute; top:22px; right:24px; z-index:1002;
+  display:flex; gap:10px;
+}
+.lightbox-caption{
+  position:absolute; bottom:24px; left:50%; transform:translateX(-50%);
+  font-family:var(--mono); font-size:12px; letter-spacing:.05em; color:var(--cream-dim);
+  background:rgba(10,20,34,0.7); border:1px solid var(--line-strong); padding:8px 16px;
+  max-width:80vw; text-align:center; z-index:1001;
+}
+.lb-btn{
+  width:40px; height:40px; border:1px solid var(--line-strong); background:rgba(15,28,48,0.85);
+  color:var(--cream); display:flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:16px;
+}
+.lb-btn:hover{border-color:var(--gold-dim); color:var(--gold);}
+.lb-btn svg{width:18px; height:18px; stroke:currentColor;}
+
 /* ===== FOOTER ===== */
 footer{padding:36px 0; border-top:1px solid var(--line);}
 .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
