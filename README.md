@@ -41,7 +41,7 @@ My Portfolio/
     │   ├── icons/                Contact/social icons (already included, ready to use)
     │   └── ui/                    Decorative textures (already included)
     │
-    ├── documents/               Your resume (and anything else you want downloadable)
+    ├── documents/               Optional downloadable files (not linked from the site by default)
     └── fonts/                    Empty — the site currently loads fonts from Google Fonts
 ```
 
@@ -52,7 +52,6 @@ The page already points at these paths. Drop a file in with the **exact name bel
 | Slot | Expected file | Notes |
 |---|---|---|
 | Your photo | `assets/images/profile/lourence-dayonot.jpg` | Falls back to `profile-placeholder.png` (included), then to a drawn icon. |
-| Résumé | `assets/documents/Lourence_Jude_Dayonot_Resume.pdf` | Linked from the nav bar, mobile menu, and the Contact section. |
 | Hero background | `assets/images/hero/blueprint-bg.jpg` | Optional. Sits behind the grid pattern at low opacity. |
 | Project photos | `assets/images/projects/project1-1.jpg`, `project1-2.jpg`, … | Each project can hold **multiple photos** — see "Multiple photos per project" below. |
 | Process icons | `assets/images/process/quantity-takeoff.png`, `market-price.png`, `verification.png`, `final-review.png` | Optional — shown inside the numbered circles. |
@@ -60,7 +59,7 @@ The page already points at these paths. Drop a file in with the **exact name bel
 | Supplier logos | `assets/images/suppliers/*.png` | Same pattern — filenames match company names. |
 | Testimonial avatars | `assets/images/testimonials/client1.jpg`, `client2.jpg`, `client3.jpg` | Falls back to initials if missing. |
 
-Also in `assets/documents/`, feel free to add `Certifications.pdf` and `Portfolio.pdf` and link to them from the Contact section the same way the résumé link works (copy one `<a>` block and change the `href`).
+If you ever want a downloadable file (résumé, certifications, etc.), drop it in `assets/documents/` and add a link to it from the Contact section, e.g. `<a href="assets/documents/yourfile.pdf" download>Download</a>`.
 
 ## Multiple photos per project
 
