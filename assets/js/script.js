@@ -24,9 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
    drag to pan while zoomed in.
    ========================================================================== */
 function initLightbox() {
-  const triggers = document.querySelectorAll('.js-zoomable');
-  if (!triggers.length) return;
-
   const MIN_ZOOM = 1;
   const MAX_ZOOM = 4;
   const ZOOM_STEP = 0.5;
@@ -34,6 +31,14 @@ function initLightbox() {
   let overlay = null;
   let stage = null;
   let img = null;
+  let caption = null;
+  let prevBtn = null;
+  let nextBtn = null;
+
+  let photos = [];
+  let photoIndex = 0;
+  let galleryName = '';
+
   let scale = 1;
   let panX = 0;
   let panY = 0;
@@ -44,7 +49,6 @@ function initLightbox() {
   let panStartY = 0;
   let lastFocused = null;
 
-  // two-finger pinch tracking
   let pinchStartDist = null;
   let pinchStartScale = 1;
 
@@ -59,6 +63,22 @@ function initLightbox() {
     applyTransform();
   }
 
+  function showPhoto(newIndex) {
+    photoIndex = (newIndex + photos.length) % photos.length;
+    img.src = photos[photoIndex];
+    scale = 1; panX = 0; panY = 0;
+    applyTransform();
+    updateCaption();
+  }
+
+  function updateCaption() {
+    if (!galleryName) { caption.style.display = 'none'; return; }
+    caption.style.display = 'block';
+    caption.textContent = photos.length > 1
+      ? `${galleryName} — ${photoIndex + 1} / ${photos.length}`
+      : galleryName;
+  }
+
   function buildOverlay() {
     overlay = document.createElement('div');
     overlay.className = 'lightbox-overlay';
@@ -70,6 +90,21 @@ function initLightbox() {
 
     img = document.createElement('img');
     stage.appendChild(img);
+
+    prevBtn = document.createElement('button');
+    prevBtn.className = 'lightbox-nav prev';
+    prevBtn.type = 'button';
+    prevBtn.setAttribute('aria-label', 'Previous photo');
+    prevBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>';
+
+    nextBtn = document.createElement('button');
+    nextBtn.className = 'lightbox-nav next';
+    nextBtn.type = 'button';
+    nextBtn.setAttribute('aria-label', 'Next photo');
+    nextBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
+
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPhoto(photoIndex - 1); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showPhoto(photoIndex + 1); });
 
     const toolbar = document.createElement('div');
     toolbar.className = 'lightbox-toolbar';
@@ -86,14 +121,12 @@ function initLightbox() {
 
     toolbar.append(zoomOutBtn, zoomInBtn, resetBtn, closeBtn);
 
-    const caption = document.createElement('div');
+    caption = document.createElement('div');
     caption.className = 'lightbox-caption';
-    caption.id = 'lightboxCaption';
 
-    overlay.append(stage, toolbar, caption);
+    overlay.append(stage, prevBtn, nextBtn, toolbar, caption);
     document.body.appendChild(overlay);
 
-    // click backdrop (not the image / toolbar) to close
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay || e.target === stage) closeLightbox();
     });
@@ -105,13 +138,11 @@ function initLightbox() {
       setZoom(scale > 1 ? 1 : 2);
     });
 
-    // mouse wheel to zoom, centered roughly on cursor
     stage.addEventListener('wheel', (e) => {
       e.preventDefault();
       setZoom(scale + (e.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP));
     }, { passive: false });
 
-    // drag to pan when zoomed in
     stage.addEventListener('mousedown', (e) => {
       if (scale <= 1) return;
       isDragging = true;
@@ -130,7 +161,6 @@ function initLightbox() {
       stage.classList.remove('dragging');
     });
 
-    // touch: pinch to zoom, one-finger drag to pan
     stage.addEventListener('touchstart', (e) => {
       if (e.touches.length === 2) {
         pinchStartDist = touchDist(e.touches);
@@ -177,24 +207,27 @@ function initLightbox() {
   }
 
   function onKeydown(e) {
-    if (!overlay) return;
+    if (!overlay || overlay.style.display === 'none') return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === '+' || e.key === '=') setZoom(scale + ZOOM_STEP);
     if (e.key === '-') setZoom(scale - ZOOM_STEP);
+    if (e.key === 'ArrowRight' && photos.length > 1) showPhoto(photoIndex + 1);
+    if (e.key === 'ArrowLeft' && photos.length > 1) showPhoto(photoIndex - 1);
   }
 
-  function openLightbox(src, alt, triggerEl) {
+  function openLightbox(photoList, startIndex, name, triggerEl) {
     lastFocused = triggerEl;
     if (!overlay) buildOverlay();
 
-    img.src = src;
-    img.alt = alt || '';
-    scale = 1; panX = 0; panY = 0;
-    applyTransform();
+    photos = photoList;
+    galleryName = name || '';
+    photoIndex = startIndex || 0;
 
-    const caption = overlay.querySelector('.lightbox-caption');
-    if (alt) { caption.textContent = alt; caption.style.display = 'block'; }
-    else { caption.style.display = 'none'; }
+    const multi = photos.length > 1;
+    prevBtn.style.display = multi ? 'flex' : 'none';
+    nextBtn.style.display = multi ? 'flex' : 'none';
+
+    showPhoto(photoIndex);
 
     document.body.style.overflow = 'hidden';
     overlay.style.display = 'flex';
@@ -212,18 +245,35 @@ function initLightbox() {
     if (lastFocused) lastFocused.focus();
   }
 
-  triggers.forEach(el => {
+  // event delegation: works for photos that are added to the page later
+  // (e.g. project galleries loaded async by project-gallery.js)
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest('.js-zoomable');
+    if (!el) return;
+    openZoomableElement(el);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const el = document.activeElement;
+    if (!el || !el.classList || !el.classList.contains('js-zoomable')) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openZoomableElement(el);
+    }
+  });
+
+  function openZoomableElement(el) {
     el.setAttribute('tabindex', '0');
     el.setAttribute('role', 'button');
-    const label = el.getAttribute('alt') ? `Zoom in on ${el.getAttribute('alt')}` : 'Zoom in on image';
-    el.setAttribute('aria-label', label);
 
-    el.addEventListener('click', () => openLightbox(el.src, el.getAttribute('alt'), el));
-    el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openLightbox(el.src, el.getAttribute('alt'), el);
-      }
-    });
-  });
+    const galleryData = el.getAttribute('data-gallery');
+    if (galleryData) {
+      const list = JSON.parse(galleryData);
+      const startIndex = parseInt(el.getAttribute('data-index') || '0', 10);
+      const name = el.getAttribute('data-gallery-name') || el.getAttribute('alt') || '';
+      openLightbox(list, startIndex, name, el);
+    } else {
+      openLightbox([el.src], 0, el.getAttribute('alt') || '', el);
+    }
+  }
 }

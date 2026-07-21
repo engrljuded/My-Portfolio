@@ -54,7 +54,7 @@ The page already points at these paths. Drop a file in with the **exact name bel
 | Your photo | `assets/images/profile/lourence-dayonot.jpg` | Falls back to `profile-placeholder.png` (included), then to a drawn icon. |
 | Résumé | `assets/documents/Lourence_Jude_Dayonot_Resume.pdf` | Linked from the nav bar, mobile menu, and the Contact section. |
 | Hero background | `assets/images/hero/blueprint-bg.jpg` | Optional. Sits behind the grid pattern at low opacity. |
-| Project photos | `assets/images/projects/project1.jpg` … `project5.jpg` | Matches the 5 sample cards in the horizontal gallery. Rename/edit the project name and address directly in `index.html`. |
+| Project photos | `assets/images/projects/project1-1.jpg`, `project1-2.jpg`, … | Each project can hold **multiple photos** — see "Multiple photos per project" below. |
 | Process icons | `assets/images/process/quantity-takeoff.png`, `market-price.png`, `verification.png`, `final-review.png` | Optional — shown inside the numbered circles. |
 | Tool logos | `assets/images/tools/*.png` | See the full list of filenames inside `index.html`'s Tools section. |
 | Supplier logos | `assets/images/suppliers/*.png` | Same pattern — filenames match company names. |
@@ -62,7 +62,28 @@ The page already points at these paths. Drop a file in with the **exact name bel
 
 Also in `assets/documents/`, feel free to add `Certifications.pdf` and `Portfolio.pdf` and link to them from the Contact section the same way the résumé link works (copy one `<a>` block and change the `href`).
 
-## Placeholder content to replace before publishing
+## Multiple photos per project
+
+Each of the 5 project cards can hold several photos, not just one. Clicking the card's photo opens a lightbox with arrows to click through all of that project's photos, zoom in/out, and pan.
+
+**Naming pattern:** `assets/images/projects/project{N}-{photo number}.jpg`, where `N` is the card number (1–5).
+
+For example, to give project 3 four photos:
+
+```
+assets/images/projects/project3-1.jpg
+assets/images/projects/project3-2.jpg
+assets/images/projects/project3-3.jpg
+assets/images/projects/project3-4.jpg
+```
+
+Notes:
+- Up to **6 photos per project** are supported out of the box. To allow more, open `index.html`, find the project's `<div class="proj-photo" ...>` and raise the `data-max-photos="6"` number.
+- You don't need all 6 slots filled — the site checks which numbered files actually exist and only uses those. A project with just `project3-1.jpg` behaves like a single photo (no arrows shown); add `project3-2.jpg` and the prev/next arrows and a "1 / 2" counter appear automatically.
+- No HTML or JS edits needed to add/remove/reorder photos — just add or delete the numbered files.
+- This is handled by `assets/js/project-gallery.js`.
+
+
 
 - **Testimonials** — the three quotes are examples. Swap in real client feedback.
 - **Projects** — the five project cards use sample names/addresses. Replace with your actual projects.
@@ -79,4 +100,3 @@ Loaded via Google Fonts CDN in `index.html` (Archivo Black, Inter, IBM Plex Mono
 ## Browser support
 
 Modern evergreen browsers (Chrome, Edge, Firefox, Safari). Uses CSS Grid, `aspect-ratio`, and `IntersectionObserver` — all widely supported since 2021+.
-"# My-Portfolio" 

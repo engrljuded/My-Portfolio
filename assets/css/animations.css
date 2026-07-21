@@ -11,8 +11,10 @@
 .tool-chip,
 .supplier-chip,
 .contact-item .c-value,
-.foot-social a{
-  transition: color .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease;
+.foot-social a,
+.photo-nav,
+.lightbox-nav{
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease, opacity .2s ease;
 }
 
 /* scroll-reveal: elements start hidden, animations.js adds .in when visible */

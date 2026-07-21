@@ -21,4 +21,5 @@
   .burger{display:flex;}
   .wrap{padding:0 22px;}
   .hero{padding:150px 0 70px;}
+  .photo-nav, .zoom-hint{opacity:1;}
 }

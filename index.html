@@ -78,10 +78,11 @@
     <div class="about-grid">
       <div class="id-badge reveal ticks"><span class="tick-bl"></span><span class="tick-br"></span>
         <div class="id-photo">
-          <img src="assets/images/profile/lourence-dayonot.jpg" alt="Lourence Jude Dayonot"
+          <img class="js-zoomable" src="assets/images/profile/lourence-dayonot.jpg" alt="Lourence Jude Dayonot"
                onerror="this.onerror=null; this.src='assets/images/profile/profile-placeholder.png';">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
           <div class="ph-label">Add your photo here</div>
+          <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
         </div>
         <div class="id-info">
           <div class="id-name">Lourence Jude Dayonot</div>
@@ -242,7 +243,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2>Projects estimated</h2>
-      <p>A sample of recent plumbing and electrical estimates.</p>
+      <p>A sample of recent plumbing and electrical estimates. Replace the photos and details with your own.</p>
     </div>
     <div class="scroll-hint reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
@@ -251,28 +252,28 @@
     <div class="proj-scroll-wrap reveal">
       <div class="proj-scroll" id="projScroll">
         <div class="proj-card">
-          <div class="proj-photo">
-            <img src="assets/images/projects/project1.jpg" alt="Riverside Townhouses" onerror="this.remove()">
+          <div class="proj-photo" data-project-id="1" data-project-name="Riverside Townhouses" data-max-photos="6">
             <span class="proj-id-tag">01</span>
             <span class="proj-status">Quote issued</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.3"><path d="M12 2v6M12 22a7 7 0 0 0 7-7c0-3-3-5-7-11-4 6-7 8-7 11a7 7 0 0 0 7 7z"/></svg>
-            <span class="ph-label">Add project photo</span>
+            <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.3"><path d="M12 2v6M12 22a7 7 0 0 0 7-7c0-3-3-5-7-11-4 6-7 8-7 11a7 7 0 0 0 7 7z"/></svg>
+            <span class="ph-label">Add project photos</span>
+            <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
           </div>
           <div class="proj-body">
-            <div class="proj-name">Alteration and Extension  to Existing Dwelling</div>
+            <div class="proj-name">Riverside Townhouses</div>
             <div class="proj-addr">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
-              <span>14 291 Esplanade East, Port Melbourne</span>
+              <span>14 Riverside Quay, Southbank VIC 3006</span>
             </div>
           </div>
         </div>
         <div class="proj-card">
-          <div class="proj-photo">
-            <img src="assets/images/projects/project2.jpg" alt="Willow Park Duplex" onerror="this.remove()">
+          <div class="proj-photo" data-project-id="2" data-project-name="Willow Park Duplex" data-max-photos="6">
             <span class="proj-id-tag">02</span>
             <span class="proj-status">Completed</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.3"><path d="M4 12h4l2-4 3 8 2-4h5"/><circle cx="12" cy="12" r="10"/></svg>
-            <span class="ph-label">Add project photo</span>
+            <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.3"><path d="M4 12h4l2-4 3 8 2-4h5"/><circle cx="12" cy="12" r="10"/></svg>
+            <span class="ph-label">Add project photos</span>
+            <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
           </div>
           <div class="proj-body">
             <div class="proj-name">Willow Park Duplex</div>
@@ -283,12 +284,12 @@
           </div>
         </div>
         <div class="proj-card">
-          <div class="proj-photo">
-            <img src="assets/images/projects/project3.jpg" alt="Northgate Retail Fitout" onerror="this.remove()">
+          <div class="proj-photo" data-project-id="3" data-project-name="Northgate Retail Fitout" data-max-photos="6">
             <span class="proj-id-tag">03</span>
             <span class="proj-status">Completed</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.3"><path d="M3 21V9l9-6 9 6v12M9 21v-6h6v6"/></svg>
-            <span class="ph-label">Add project photo</span>
+            <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.3"><path d="M3 21V9l9-6 9 6v12M9 21v-6h6v6"/></svg>
+            <span class="ph-label">Add project photos</span>
+            <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
           </div>
           <div class="proj-body">
             <div class="proj-name">Northgate Retail Fitout</div>
@@ -299,12 +300,12 @@
           </div>
         </div>
         <div class="proj-card">
-          <div class="proj-photo">
-            <img src="assets/images/projects/project4.jpg" alt="Sunview Apartments" onerror="this.remove()">
+          <div class="proj-photo" data-project-id="4" data-project-name="Sunview Apartments" data-max-photos="6">
             <span class="proj-id-tag">04</span>
             <span class="proj-status">In verification</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.3"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
-            <span class="ph-label">Add project photo</span>
+            <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.3"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            <span class="ph-label">Add project photos</span>
+            <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
           </div>
           <div class="proj-body">
             <div class="proj-name">Sunview Apartments</div>
@@ -315,12 +316,12 @@
           </div>
         </div>
         <div class="proj-card">
-          <div class="proj-photo">
-            <img src="assets/images/projects/project5.jpg" alt="Harbour View Renovation" onerror="this.remove()">
+          <div class="proj-photo" data-project-id="5" data-project-name="Harbour View Renovation" data-max-photos="6">
             <span class="proj-id-tag">05</span>
             <span class="proj-status">Quote issued</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.3"><path d="M3 9l9-6 9 6M5 10v10h14V10"/></svg>
-            <span class="ph-label">Add project photo</span>
+            <svg class="ph-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.3"><path d="M3 9l9-6 9 6M5 10v10h14V10"/></svg>
+            <span class="ph-label">Add project photos</span>
+            <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
           </div>
           <div class="proj-body">
             <div class="proj-name">Harbour View Renovation</div>
@@ -380,6 +381,7 @@
 
 <script src="assets/js/navbar.js"></script>
 <script src="assets/js/scroll-gallery.js"></script>
+<script src="assets/js/project-gallery.js"></script>
 <script src="assets/js/animations.js"></script>
 <script src="assets/js/script.js"></script>
 </body>
